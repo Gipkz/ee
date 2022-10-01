@@ -1,0 +1,110 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({IntroText = "Sa Kanki",Name = "Cathe Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "konfig cathe"})
+local GameTab = Window:MakeTab({
+	Name = "oyun",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local CharTab = Window:MakeTab({
+	Name = "karakter",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local TargetWalkspeed
+CharTab:AddSlider({
+	Name = "Hiz",
+	Min = 0,
+	Max = 20000,
+	Default = 0,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	Callback = function(Value)
+		TargetWalkspeed = Value
+	end    
+})
+
+GameTab:AddButton({
+	Name = "Win",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1000, 10, 779004, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(900, 11, 0)
+wait(11.5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1000, 10, 780104, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+ 	end    
+})
+
+GameTab:AddButton({
+	Name = "Anti Cheat Bypass",
+	Callback = function()
+Float_Height = "2000"
+
+local i=1
+G=game;
+_=wait;
+p=G:GetService("Players").LocalPlayer.Character
+p:FindFirstChild("Humanoid").HipHeight = Float_Height
+_(1.5);
+t=.4;
+n=2;
+for i=1,i do
+repeat p:FindFirstChild("Humanoid").HipHeight=Float_Height-n _(t)p:FindFirstChild("Humanoid").HipHeight=Float_Height+n _(t) until
+p:FindFirstChild("Humanoid").Health == 0
+end
+ 	end    
+})
+
+GameTab:AddButton({
+	Name = "Anti Fall",
+	Callback = function()
+Float_Height = "100"
+
+local i=1
+G=game;
+_=wait;
+p=G:GetService("Players").LocalPlayer.Character
+p:FindFirstChild("Humanoid").HipHeight = Float_Height
+_(1.5);
+t=.4;
+n=2;
+for i=1,i do
+repeat p:FindFirstChild("Humanoid").HipHeight=Float_Height-n _(t)p:FindFirstChild("Humanoid").HipHeight=Float_Height+n _(t) until
+p:FindFirstChild("Humanoid").Health == 0
+end
+ 	end    
+})
+GameTab:AddParagraph("uyari","hareket etmeyiniz")
+
+--// ok actual code starts here
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    pcall(function()
+        if game.Players.LocalPlayer.Character.Humanoid.MoveDirection.Magnitude > 0 then
+            game.Players.LocalPlayer.Character:TranslateBy(game.Players.LocalPlayer.Character.Humanoid.MoveDirection * TargetWalkspeed/50)
+        end
+    end)
+end)
+
+game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
+    if OrionLib.Flags["InstantToggle"].Value == true then
+        fireproximityprompt(prompt)
+    end
+end)
+
+--// ok actual code ends here
+
+local CreditsTab = Window:MakeTab({
+	Name = "Credits",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+CreditsTab:AddParagraph("Cathe Pro","Tsk kullandigin icin")
+
+coroutine.resume(NotificationCoroutine)
+
+OrionLib:Init()
+
+task.wait(2)
